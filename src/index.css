@@ -1,12 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body{
   margin:0;
-  padding:0;
-  background:#e5e5e5;
   font-family:"Times New Roman", serif;
+  background:#e5e5e5;
   overflow-x:hidden;
 }
 
@@ -14,33 +11,95 @@ body{
   box-sizing:border-box;
 }
 
-.preview-wrapper{
-  width:100%;
-  overflow-x:auto;
-  display:flex;
-  justify-content:center;
-  padding:20px 10px;
-}
-
-.preview-page{
+/* real PDF size */
+.cover-page{
+  width:794px;
+  height:1123px;
   background:white;
-  width:210mm;
-  min-height:297mm;
-  transform-origin:top center;
-  box-shadow:0 0 10px rgba(0,0,0,0.15);
+  overflow:hidden;
 }
 
-/* MOBILE FIX */
-@media (max-width:768px){
+.cover-border{
+  border:7px double black;
+  margin:20px;
+  height:1083px;
+  padding:55px 60px 40px 60px;
+}
 
-  .preview-wrapper{
-    overflow-x:hidden;
-    padding:10px;
+.college-title{
+  text-align:center;
+  font-size:38px;
+  font-weight:bold;
+  line-height:1.2;
+  margin:0;
+}
+
+.department-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:22px;
+}
+
+.college-logo{
+  width:180px;
+  display:block;
+  margin:55px auto;
+}
+
+.course-section{
+  text-align:center;
+}
+
+.course-section h3{
+  font-size:21px;
+  font-weight:bold;
+  margin:22px 0;
+}
+
+.submitted-block{
+  width:430px;
+  margin-top:70px;
+}
+
+.submitted-block h3{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:22px;
+}
+
+.submitted-block p{
+  font-size:19px;
+  font-weight:bold;
+  line-height:1.3;
+  margin:0;
+}
+
+.submitted-to{
+  margin-top:42px;
+}
+
+.date-text{
+  margin-top:60px;
+}
+
+/* desktop preview */
+.preview-box{
+  width:794px;
+  height:1123px;
+}
+
+/* mobile preview: same full width, scroll down shows full page */
+@media(max-width:768px){
+  .preview-box{
+    width:100%;
+    height:auto;
+    aspect-ratio:794 / 1123;
+    overflow:hidden;
   }
 
-  .preview-page{
-    width:100%;
-    min-height:auto;
-    transform:none !important;
+  .cover-page{
+    transform:scale(calc((100vw - 32px) / 794));
+    transform-origin:top left;
   }
 }
