@@ -1,13 +1,11 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import html2pdf from "html2pdf.js";
 
 export default function App() {
-  const pdfRef = useRef();
-
-  const [data, setData] = useState({
+  const [form, setForm] = useState({
     courseTitle: "",
     courseCode: "",
-    assignmentNumber: "",
+    assignmentNo: "",
     assignmentTitle: "",
     studentName: "",
     studentId: "",
@@ -16,20 +14,22 @@ export default function App() {
     batch: "",
     teacherName: "",
     teacherDesignation: "",
-    teacherDept: "",
-    teacherCollege: "",
+    department: "",
+    collegeName: "Shyamoli Engineering College",
     submissionDate: "",
-    blockAlign: "left",
+    align: "left",
   });
 
   const handleChange = (e) => {
-    setData({
-      ...data,
+    setForm({
+      ...form,
       [e.target.name]: e.target.value,
     });
   };
 
   const generatePDF = () => {
+    const element = document.getElementById("cover");
+
     const opt = {
       margin: 0,
       filename: "assignment-cover.pdf",
@@ -37,130 +37,241 @@ export default function App() {
       html2canvas: {
         scale: 2,
         useCORS: true,
-        scrollY: 0,
       },
       jsPDF: {
-        unit: "px",
-        format: [794, 1123],
+        unit: "mm",
+        format: "a4",
         orientation: "portrait",
       },
     };
 
-    html2pdf().set(opt).from(pdfRef.current).save();
+    html2pdf().set(opt).from(element).save();
   };
 
-  const blockPosition =
-    data.blockAlign === "left"
-      ? "w-[430px] ml-0 text-left"
-      : data.blockAlign === "center"
-      ? "w-[430px] mx-auto text-left"
-      : "w-[430px] ml-auto text-left";
-
   return (
-    <div className="min-h-screen bg-gray-200 p-4 md:p-8">
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        
-        <div className="w-full lg:w-[340px] bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-4xl font-bold text-center mb-6">
-            Fill Information
-          </h2>
+    <div className="min-h-screen bg-gray-200 p-3 md:p-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <div className="space-y-3">
-            <Input name="courseTitle" placeholder="Course Title" value={data.courseTitle} onChange={handleChange} />
-            <Input name="courseCode" placeholder="Course Code" value={data.courseCode} onChange={handleChange} />
-            <Input name="assignmentNumber" placeholder="Assignment Number" value={data.assignmentNumber} onChange={handleChange} />
-            <Input name="assignmentTitle" placeholder="Assignment Title" value={data.assignmentTitle} onChange={handleChange} />
-            <Input name="studentName" placeholder="Student Name" value={data.studentName} onChange={handleChange} />
-            <Input name="studentId" placeholder="Student ID" value={data.studentId} onChange={handleChange} />
-            <Input name="program" placeholder="Program" value={data.program} onChange={handleChange} />
-            <Input name="semester" placeholder="Semester" value={data.semester} onChange={handleChange} />
-            <Input name="batch" placeholder="Batch" value={data.batch} onChange={handleChange} />
-            <Input name="teacherName" placeholder="Teacher Name" value={data.teacherName} onChange={handleChange} />
-            <Input name="teacherDesignation" placeholder="Teacher Designation" value={data.teacherDesignation} onChange={handleChange} />
-            <Input name="teacherDept" placeholder="Department" value={data.teacherDept} onChange={handleChange} />
-            <Input name="teacherCollege" placeholder="College Name" value={data.teacherCollege} onChange={handleChange} />
-            <Input name="submissionDate" placeholder="Example: 4 May 2026" value={data.submissionDate} onChange={handleChange} />
+        {/* FORM */}
+        <div className="bg-white p-5 rounded-2xl shadow-lg h-fit">
+          <h1 className="text-3xl font-bold text-center mb-6">
+            Assignment Cover Generator
+          </h1>
+
+          <div className="space-y-4">
+            <Input
+              name="courseTitle"
+              placeholder="Course Title"
+              value={form.courseTitle}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="courseCode"
+              placeholder="Course Code"
+              value={form.courseCode}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="assignmentNo"
+              placeholder="Assignment Number"
+              value={form.assignmentNo}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="assignmentTitle"
+              placeholder="Assignment Title"
+              value={form.assignmentTitle}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="studentName"
+              placeholder="Student Name"
+              value={form.studentName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="studentId"
+              placeholder="Student ID"
+              value={form.studentId}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="program"
+              placeholder="Program"
+              value={form.program}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="semester"
+              placeholder="Semester"
+              value={form.semester}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="batch"
+              placeholder="Batch"
+              value={form.batch}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="teacherName"
+              placeholder="Teacher Name"
+              value={form.teacherName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="teacherDesignation"
+              placeholder="Teacher Designation"
+              value={form.teacherDesignation}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="department"
+              placeholder="Department"
+              value={form.department}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="collegeName"
+              placeholder="College Name"
+              value={form.collegeName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="submissionDate"
+              placeholder="Example: 4 May 2026"
+              value={form.submissionDate}
+              onChange={handleChange}
+            />
 
             <select
-              name="blockAlign"
-              value={data.blockAlign}
+              name="align"
+              value={form.align}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg outline-none bg-white"
+              className="w-full border rounded-lg p-4 text-lg"
             >
               <option value="left">Submitted Block Left</option>
-              <option value="center">Submitted Block Middle</option>
+              <option value="center">Submitted Block Center</option>
               <option value="right">Submitted Block Right</option>
             </select>
-          </div>
 
-          <button
-            onClick={generatePDF}
-            className="w-full mt-5 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold text-lg"
-          >
-            Generate PDF
-          </button>
+            <button
+              onClick={generatePDF}
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl"
+            >
+              Generate PDF
+            </button>
+          </div>
         </div>
 
-        <div className="w-full overflow-hidden bg-gray-200">
-          <div className="mobile-preview mx-auto">
-            <div
-              ref={pdfRef}
-              className="pdf-page w-[794px] h-[1123px] bg-white mx-auto"
-            >
-              <div className="border-[7px] border-double border-black h-[1083px] m-[20px] px-[60px] pt-[55px] pb-[40px] box-border">
-                <h1 className="text-center text-[38px] font-bold leading-tight">
-                  Shyamoli Engineering College
+        {/* PREVIEW */}
+        <div className="w-full overflow-x-auto flex justify-center">
+          <div
+            id="cover"
+            className="bg-[#f5f5f5] relative shadow-lg overflow-hidden"
+            style={{
+              width: window.innerWidth < 768 ? "95vw" : "210mm",
+              minHeight: window.innerWidth < 768 ? "135vw" : "297mm",
+              padding: window.innerWidth < 768 ? "10px" : "20mm",
+            }}
+          >
+            {/* BORDER */}
+            <div className="absolute inset-3 border-[5px] border-black"></div>
+            <div className="absolute inset-5 border-[2px] border-black"></div>
+
+            <div className="relative z-10">
+
+              {/* TOP */}
+              <div className="text-center mt-8">
+                <h1 className="text-3xl md:text-5xl font-bold">
+                  {form.collegeName}
                 </h1>
 
-                <h2 className="text-center text-[22px] font-bold mt-[22px]">
+                <h2 className="text-lg md:text-2xl font-bold mt-4">
                   Department of Computer Science and Engineering (CSE)
                 </h2>
 
                 <img
                   src="/logo.png"
-                  alt="Logo"
-                  className="w-[180px] mx-auto mt-[55px] mb-[55px]"
+                  alt="logo"
+                  className="w-32 md:w-48 mx-auto my-8"
                 />
 
-                <div className="text-center">
-                  <h3 className="text-[21px] font-bold mb-[22px]">
-                    Course Title: {data.courseTitle || "Linear Algebra"}, Course Code: {data.courseCode || "MATH-2105"}
-                  </h3>
+                <h3 className="text-lg md:text-2xl font-bold">
+                  Course Title: {form.courseTitle},
+                  Course Code: {form.courseCode}
+                </h3>
 
-                  <h3 className="text-[21px] font-bold">
-                    Assignment #{data.assignmentNumber || "01"}, Title: {data.assignmentTitle || "Matrix"}
-                  </h3>
-                </div>
+                <h3 className="text-lg md:text-2xl font-bold mt-5">
+                  Assignment #{form.assignmentNo},
+                  Title: {form.assignmentTitle}
+                </h3>
+              </div>
 
-                <div className={`mt-[70px] ${blockPosition}`}>
-                  <h3 className="text-[22px] font-bold mb-[22px]">
-                    SUBMITTED BY:
-                  </h3>
+              {/* SUBMITTED SECTION */}
+              <div
+                className={`mt-16 px-4 md:px-10 ${
+                  form.align === "center"
+                    ? "text-center"
+                    : form.align === "right"
+                    ? "text-right"
+                    : "text-left"
+                }`}
+              >
+                <div className="space-y-10">
 
-                  <p className="text-[19px] font-bold leading-[1.3]">
-                    Name: {data.studentName || "MD MIRZA GALIB PALASH"} <br />
-                    ID: {data.studentId || "80/24|CSE-34"} <br />
-                    Program: {data.program || "B.Sc. in CSE"} <br />
-                    Semester: {data.semester || "3rd"} <br />
-                    Batch: {data.batch || "5th"}
-                  </p>
+                  {/* Submitted By */}
+                  <div>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-5">
+                      SUBMITTED BY:
+                    </h2>
 
-                  <h3 className="text-[22px] font-bold mt-[42px] mb-[22px]">
-                    SUBMITTED TO:
-                  </h3>
+                    <div className="text-lg md:text-2xl font-semibold leading-relaxed">
+                      <p>Name: {form.studentName}</p>
+                      <p>ID: {form.studentId}</p>
+                      <p>Program: {form.program}</p>
+                      <p>Semester: {form.semester}</p>
+                      <p>Batch: {form.batch}</p>
+                    </div>
+                  </div>
 
-                  <p className="text-[19px] font-bold leading-[1.3]">
-                    {data.teacherName || "Khalid Bin Kaysar"} <br />
-                    {data.teacherDesignation || "Lecturer, Mathematics"} <br />
-                    {data.teacherDept || "Dept. Of Related Subjects"} <br />
-                    {data.teacherCollege || "Shyamoli Engineering College"}
-                  </p>
+                  {/* Submitted To */}
+                  <div>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-5">
+                      SUBMITTED TO:
+                    </h2>
 
-                  <h3 className="text-[22px] font-bold mt-[60px]">
-                    DATE OF SUBMISSION: {data.submissionDate || "4 May 2026"}
-                  </h3>
+                    <div className="text-lg md:text-2xl font-semibold leading-relaxed">
+                      <p>{form.teacherName}</p>
+                      <p>{form.teacherDesignation}</p>
+                      <p>{form.department}</p>
+                      <p>{form.collegeName}</p>
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <div className="pb-10">
+                    <h2 className="text-xl md:text-3xl font-bold">
+                      DATE OF SUBMISSION: {form.submissionDate}
+                    </h2>
+                  </div>
+
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -178,7 +289,7 @@ function Input({ name, placeholder, value, onChange }) {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg outline-none focus:border-green-500"
+      className="w-full border border-gray-300 rounded-lg px-4 py-4 text-lg outline-none"
     />
   );
 }
