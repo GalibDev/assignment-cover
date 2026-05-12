@@ -138,8 +138,8 @@ export default function App() {
                   </h3>
 
                   <p className="text-[19px] font-bold leading-[1.3]">
-                    Name: {data.studentName || "Tanjila Khanam Tamim"} <br />
-                    ID: {data.studentId || "49/24|CSE-22"} <br />
+                    Name: {data.studentName || "MD MIRZA GALIB"} <br />
+                    ID: {data.studentId || "80/24|CSE-34"} <br />
                     Program: {data.program || "B.Sc. in CSE"} <br />
                     Semester: {data.semester || "3rd"} <br />
                     Batch: {data.batch || "5th"}
