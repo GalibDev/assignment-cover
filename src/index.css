@@ -11,8 +11,76 @@ body{
   box-sizing:border-box;
 }
 
-/* real PDF size */
-.cover-page{
+.page{
+  min-height:100vh;
+  background:#e5e5e5;
+  padding:24px;
+}
+
+.layout{
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+}
+
+.form-box{
+  width:340px;
+  background:white;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.15);
+}
+
+.form-box h1{
+  text-align:center;
+  font-size:36px;
+  font-weight:bold;
+  margin:0 0 22px 0;
+}
+
+.input{
+  width:100%;
+  padding:15px 16px;
+  margin-bottom:14px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:18px;
+  outline:none;
+  background:white;
+}
+
+.generate-btn{
+  width:100%;
+  padding:16px;
+  background:#05a83f;
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:22px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* Preview area */
+.preview-area{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+.preview-box{
+  width:794px;
+  height:1123px;
+}
+
+.preview-scale{
+  width:794px;
+  height:1123px;
+  transform-origin:top left;
+}
+
+/* Real A4 export size */
+.pdf-page{
   width:794px;
   height:1123px;
   background:white;
@@ -47,11 +115,11 @@ body{
   margin:55px auto;
 }
 
-.course-section{
+.course-info{
   text-align:center;
 }
 
-.course-section h3{
+.course-info h3{
   font-size:21px;
   font-weight:bold;
   margin:22px 0;
@@ -60,6 +128,22 @@ body{
 .submitted-block{
   width:430px;
   margin-top:70px;
+  text-align:left;
+}
+
+.submitted-block.left{
+  margin-left:0;
+  margin-right:auto;
+}
+
+.submitted-block.center{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.submitted-block.right{
+  margin-left:auto;
+  margin-right:0;
 }
 
 .submitted-block h3{
@@ -83,22 +167,60 @@ body{
   margin-top:60px;
 }
 
-/* desktop preview */
-.preview-box{
-  width:794px;
-  height:1123px;
+/* Export time: force original A4 */
+.pdf-mode .preview-scale{
+  transform:none !important;
 }
 
-/* mobile preview: same full width, scroll down shows full page */
+.pdf-mode .preview-box{
+  width:794px !important;
+  height:1123px !important;
+}
+
+/* Mobile view: only preview is scaled beautifully */
 @media(max-width:768px){
+  .page{
+    padding:16px;
+  }
+
+  .layout{
+    display:block;
+  }
+
+  .form-box{
+    width:100%;
+    margin-bottom:32px;
+  }
+
+  .form-box h1{
+    font-size:34px;
+  }
+
+  .input{
+    font-size:20px;
+    padding:18px;
+    margin-bottom:16px;
+  }
+
+  .generate-btn{
+    font-size:24px;
+    padding:18px;
+  }
+
+  .preview-area{
+    width:100%;
+    display:block;
+  }
+
   .preview-box{
     width:100%;
-    height:auto;
-    aspect-ratio:794 / 1123;
+    height:calc((100vw - 32px) * 1123 / 794);
     overflow:hidden;
   }
 
-  .cover-page{
+  .preview-scale{
+    width:794px;
+    height:1123px;
     transform:scale(calc((100vw - 32px) / 794));
     transform-origin:top left;
   }
