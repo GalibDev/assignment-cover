@@ -33,13 +33,11 @@ export default function App() {
     const opt = {
       margin: 0,
       filename: "assignment-cover.pdf",
-      image: {
-        type: "jpeg",
-        quality: 1,
-      },
+      image: { type: "jpeg", quality: 1 },
       html2canvas: {
         scale: 2,
         useCORS: true,
+        scrollY: 0,
       },
       jsPDF: {
         unit: "px",
@@ -61,7 +59,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-200 p-4 md:p-8">
       <div className="flex flex-col lg:flex-row gap-6 items-start">
-
+        
         <div className="w-full lg:w-[340px] bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-4xl font-bold text-center mb-6">
             Fill Information
@@ -87,7 +85,7 @@ export default function App() {
               name="blockAlign"
               value={data.blockAlign}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg outline-none focus:border-green-500 bg-white"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg outline-none bg-white"
             >
               <option value="left">Submitted Block Left</option>
               <option value="center">Submitted Block Middle</option>
@@ -103,65 +101,65 @@ export default function App() {
           </button>
         </div>
 
-        <div className="w-full overflow-auto">
-          <div
-            ref={pdfRef}
-            className="w-[794px] h-[1123px] bg-white mx-auto"
-          >
-            <div className="border-[7px] border-double border-black h-[1083px] m-[20px] px-[60px] pt-[55px] pb-[40px] box-border">
-              <h1 className="text-center text-[38px] font-bold leading-tight">
-                Shyamoli Engineering College
-              </h1>
+        <div className="w-full overflow-hidden bg-gray-200">
+          <div className="mobile-preview mx-auto">
+            <div
+              ref={pdfRef}
+              className="pdf-page w-[794px] h-[1123px] bg-white mx-auto"
+            >
+              <div className="border-[7px] border-double border-black h-[1083px] m-[20px] px-[60px] pt-[55px] pb-[40px] box-border">
+                <h1 className="text-center text-[38px] font-bold leading-tight">
+                  Shyamoli Engineering College
+                </h1>
 
-              <h2 className="text-center text-[22px] font-bold mt-[22px]">
-                Department of Computer Science and Engineering (CSE)
-              </h2>
+                <h2 className="text-center text-[22px] font-bold mt-[22px]">
+                  Department of Computer Science and Engineering (CSE)
+                </h2>
 
-              <img
-                src="/logo.png"
-                alt="Logo"
-                className="w-[180px] mx-auto mt-[55px] mb-[55px]"
-              />
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="w-[180px] mx-auto mt-[55px] mb-[55px]"
+                />
 
-              <div className="text-center">
-                <h3 className="text-[21px] font-bold mb-[22px]">
-                  Course Title: {data.courseTitle || "Linear Algebra"},
-                  Course Code: {data.courseCode || "MATH-2105"}
-                </h3>
+                <div className="text-center">
+                  <h3 className="text-[21px] font-bold mb-[22px]">
+                    Course Title: {data.courseTitle || "Linear Algebra"}, Course Code: {data.courseCode || "MATH-2105"}
+                  </h3>
 
-                <h3 className="text-[21px] font-bold">
-                  Assignment #{data.assignmentNumber || "01"},
-                  Title: {data.assignmentTitle || "Matrix"}
-                </h3>
-              </div>
+                  <h3 className="text-[21px] font-bold">
+                    Assignment #{data.assignmentNumber || "01"}, Title: {data.assignmentTitle || "Matrix"}
+                  </h3>
+                </div>
 
-              <div className={`mt-[70px] ${blockPosition}`}>
-                <h3 className="text-[22px] font-bold mb-[22px]">
-                  SUBMITTED BY:
-                </h3>
+                <div className={`mt-[70px] ${blockPosition}`}>
+                  <h3 className="text-[22px] font-bold mb-[22px]">
+                    SUBMITTED BY:
+                  </h3>
 
-                <p className="text-[19px] font-bold leading-[1.3]">
-                  Name: {data.studentName || "MD MIRZA GALIB PALASH"} <br />
-                  ID: {data.studentId || "80/24|CSE-34"} <br />
-                  Program: {data.program || "B.Sc. in CSE"} <br />
-                  Semester: {data.semester || "3rd"} <br />
-                  Batch: {data.batch || "5th"}
-                </p>
+                  <p className="text-[19px] font-bold leading-[1.3]">
+                    Name: {data.studentName || "MD MIRZA GALIB PALASH"} <br />
+                    ID: {data.studentId || "80/24|CSE-34"} <br />
+                    Program: {data.program || "B.Sc. in CSE"} <br />
+                    Semester: {data.semester || "3rd"} <br />
+                    Batch: {data.batch || "5th"}
+                  </p>
 
-                <h3 className="text-[22px] font-bold mt-[42px] mb-[22px]">
-                  SUBMITTED TO:
-                </h3>
+                  <h3 className="text-[22px] font-bold mt-[42px] mb-[22px]">
+                    SUBMITTED TO:
+                  </h3>
 
-                <p className="text-[19px] font-bold leading-[1.3]">
-                  {data.teacherName || "Khalid Bin Kaysar"} <br />
-                  {data.teacherDesignation || "Lecturer, Mathematics"} <br />
-                  {data.teacherDept || "Dept. Of Related Subjects"} <br />
-                  {data.teacherCollege || "Shyamoli Engineering College"}
-                </p>
+                  <p className="text-[19px] font-bold leading-[1.3]">
+                    {data.teacherName || "Khalid Bin Kaysar"} <br />
+                    {data.teacherDesignation || "Lecturer, Mathematics"} <br />
+                    {data.teacherDept || "Dept. Of Related Subjects"} <br />
+                    {data.teacherCollege || "Shyamoli Engineering College"}
+                  </p>
 
-                <h3 className="text-[22px] font-bold mt-[60px]">
-                  DATE OF SUBMISSION: {data.submissionDate || "4 May 2026"}
-                </h3>
+                  <h3 className="text-[22px] font-bold mt-[60px]">
+                    DATE OF SUBMISSION: {data.submissionDate || "4 May 2026"}
+                  </h3>
+                </div>
               </div>
             </div>
           </div>

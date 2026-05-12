@@ -5,3 +5,22 @@ body{
   font-family:"Times New Roman", serif;
   background:#e5e5e5;
 }
+
+.mobile-preview{
+  width:794px;
+  height:1123px;
+}
+
+@media screen and (max-width:768px){
+  .mobile-preview{
+    width:100%;
+    height:calc((100vw - 32px) * 1.414);
+    overflow:hidden;
+  }
+
+  .pdf-page{
+    transform:scale(calc((100vw - 32px) / 794));
+    transform-origin:top left;
+    margin-left:0 !important;
+  }
+}
