@@ -1,13 +1,10 @@
-import { useRef, useState } from "react";
-import html2pdf from "html2pdf.js";
+import { useState } from "react";
 
 export default function App() {
-  const pdfRef = useRef();
-
-  const [data, setData] = useState({
+  const [formData, setFormData] = useState({
     courseTitle: "",
     courseCode: "",
-    assignmentNumber: "",
+    assignmentNo: "",
     assignmentTitle: "",
     studentName: "",
     studentId: "",
@@ -16,135 +13,274 @@ export default function App() {
     batch: "",
     teacherName: "",
     teacherDesignation: "",
-    teacherDept: "",
-    teacherCollege: "",
-    submissionDate: "",
-    blockAlign: "left",
+    department: "",
+    collegeName: "Shyamoli Engineering College",
+    date: "",
+    align: "left",
   });
 
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const generatePDF = () => {
-    document.body.classList.add("exporting-pdf");
-
-    const opt = {
-      margin: 0,
-      filename: "assignment-cover.pdf",
-      image: { type: "jpeg", quality: 1 },
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        scrollY: 0,
-      },
-      jsPDF: {
-        unit: "px",
-        format: [794, 1123],
-        orientation: "portrait",
-      },
-    };
-
-    html2pdf()
-      .set(opt)
-      .from(pdfRef.current)
-      .save()
-      .then(() => {
-        document.body.classList.remove("exporting-pdf");
-      });
-  };
+  const alignmentClass =
+    formData.align === "center"
+      ? "items-center text-center"
+      : formData.align === "right"
+      ? "items-end text-right"
+      : "items-start text-left";
 
   return (
-    <div className="page">
-      <div className="layout">
-        <div className="form-box">
-          <h2>Fill Information</h2>
+    <div className="min-h-screen bg-gray-200 p-3 md:p-6">
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-6">
+        Assignment Cover Generator
+      </h1>
 
-          <Input name="courseTitle" placeholder="Course Title" value={data.courseTitle} onChange={handleChange} />
-          <Input name="courseCode" placeholder="Course Code" value={data.courseCode} onChange={handleChange} />
-          <Input name="assignmentNumber" placeholder="Assignment Number" value={data.assignmentNumber} onChange={handleChange} />
-          <Input name="assignmentTitle" placeholder="Assignment Title" value={data.assignmentTitle} onChange={handleChange} />
-          <Input name="studentName" placeholder="Student Name" value={data.studentName} onChange={handleChange} />
-          <Input name="studentId" placeholder="Student ID" value={data.studentId} onChange={handleChange} />
-          <Input name="program" placeholder="Program" value={data.program} onChange={handleChange} />
-          <Input name="semester" placeholder="Semester" value={data.semester} onChange={handleChange} />
-          <Input name="batch" placeholder="Batch" value={data.batch} onChange={handleChange} />
-          <Input name="teacherName" placeholder="Teacher Name" value={data.teacherName} onChange={handleChange} />
-          <Input name="teacherDesignation" placeholder="Teacher Designation" value={data.teacherDesignation} onChange={handleChange} />
-          <Input name="teacherDept" placeholder="Department" value={data.teacherDept} onChange={handleChange} />
-          <Input name="teacherCollege" placeholder="College Name" value={data.teacherCollege} onChange={handleChange} />
-          <Input name="submissionDate" placeholder="Example: 4 May 2026" value={data.submissionDate} onChange={handleChange} />
+      <div className="flex flex-col xl:flex-row gap-6">
+        {/* FORM */}
+        <div className="w-full xl:w-[350px] bg-white rounded-2xl shadow-lg p-5 h-fit">
+          <div className="space-y-4">
+            <Input
+              name="courseTitle"
+              placeholder="Course Title"
+              value={formData.courseTitle}
+              onChange={handleChange}
+            />
 
-          <select
-            name="blockAlign"
-            value={data.blockAlign}
-            onChange={handleChange}
-            className="input"
-          >
-            <option value="left">Submitted Block Left</option>
-            <option value="center">Submitted Block Middle</option>
-            <option value="right">Submitted Block Right</option>
-          </select>
+            <Input
+              name="courseCode"
+              placeholder="Course Code"
+              value={formData.courseCode}
+              onChange={handleChange}
+            />
 
-          <button onClick={generatePDF} className="generate-btn">
-            Generate PDF
-          </button>
+            <Input
+              name="assignmentNo"
+              placeholder="Assignment Number"
+              value={formData.assignmentNo}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="assignmentTitle"
+              placeholder="Assignment Title"
+              value={formData.assignmentTitle}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="studentName"
+              placeholder="Student Name"
+              value={formData.studentName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="studentId"
+              placeholder="Student ID"
+              value={formData.studentId}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="program"
+              placeholder="Program"
+              value={formData.program}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="semester"
+              placeholder="Semester"
+              value={formData.semester}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="batch"
+              placeholder="Batch"
+              value={formData.batch}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="teacherName"
+              placeholder="Teacher Name"
+              value={formData.teacherName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="teacherDesignation"
+              placeholder="Teacher Designation"
+              value={formData.teacherDesignation}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="department"
+              placeholder="Department"
+              value={formData.department}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="collegeName"
+              placeholder="College Name"
+              value={formData.collegeName}
+              onChange={handleChange}
+            />
+
+            <Input
+              name="date"
+              placeholder="Example: 4 May 2026"
+              value={formData.date}
+              onChange={handleChange}
+            />
+
+            <select
+              name="align"
+              value={formData.align}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-xl p-4 text-lg"
+            >
+              <option value="left">Submitted Block Left</option>
+              <option value="center">Submitted Block Center</option>
+              <option value="right">Submitted Block Right</option>
+            </select>
+
+            <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-2xl py-4 rounded-xl">
+              Generate PDF
+            </button>
+          </div>
         </div>
 
-        <div className="preview-wrapper">
-          <div className="preview-holder">
-            <div className="preview-scale">
-              <div ref={pdfRef} className="pdf-page">
-                <div className="cover-border">
-                  <h1 className="college-title">
-                    Shyamoli Engineering College
+        {/* PREVIEW */}
+        <div className="flex-1 overflow-hidden">
+          <div className="w-full overflow-x-auto">
+            <div className="flex justify-center min-w-full">
+              <div
+                className="
+                  bg-white
+                  shadow-xl
+                  relative
+                  border-[6px]
+                  border-black
+                  p-4
+                  md:p-8
+                  lg:p-16
+                "
+                style={{
+                  width: "210mm",
+                  minHeight: "297mm",
+                  maxWidth: "100%",
+                }}
+              >
+                {/* INNER BORDER */}
+                <div className="absolute inset-2 border-[3px] border-black pointer-events-none"></div>
+
+                {/* CONTENT */}
+                <div className="relative z-10">
+                  <h1 className="text-2xl md:text-5xl font-bold text-center">
+                    {formData.collegeName || "Shyamoli Engineering College"}
                   </h1>
 
-                  <h2 className="department-title">
+                  <h2 className="text-lg md:text-3xl font-bold text-center mt-5">
                     Department of Computer Science and Engineering (CSE)
                   </h2>
 
-                  <img src="/logo.png" alt="Logo" className="college-logo" />
+                  <img
+                    src="/logo.png"
+                    alt="logo"
+                    className="w-32 md:w-52 mx-auto my-8 md:my-12"
+                  />
 
-                  <div className="course-info">
-                    <h3>
-                      Course Title: {data.courseTitle || "Linear Algebra"}, Course Code: {data.courseCode || "MATH-2105"}
-                    </h3>
-                    <h3>
-                      Assignment #{data.assignmentNumber || "01"}, Title: {data.assignmentTitle || "Matrix"}
-                    </h3>
-                  </div>
+                  <h2 className="text-lg md:text-3xl font-bold text-center">
+                    Course Title:{" "}
+                    {formData.courseTitle || "Linear Algebra"},
+                    Course Code: {formData.courseCode || "MATH-2105"}
+                  </h2>
 
-                  <div className={`submitted-section ${data.blockAlign}`}>
-                    <h3>SUBMITTED BY:</h3>
+                  <h2 className="text-lg md:text-3xl font-bold text-center mt-5">
+                    Assignment #{formData.assignmentNo || "01"},
+                    Title: {formData.assignmentTitle || "Matrix"}
+                  </h2>
 
-                    <p>
-                      Name: {data.studentName || "Tanjila Khanam Tamim"} <br />
-                      ID: {data.studentId || "49/24|CSE-22"} <br />
-                      Program: {data.program || "B.Sc. in CSE"} <br />
-                      Semester: {data.semester || "3rd"} <br />
-                      Batch: {data.batch || "5th"}
-                    </p>
+                  {/* SUBMITTED SECTION */}
+                  <div
+                    className={`flex flex-col ${alignmentClass} mt-16 md:mt-24`}
+                  >
+                    <div className="w-full md:w-[60%]">
+                      <h2 className="text-2xl md:text-4xl font-bold mb-6">
+                        SUBMITTED BY:
+                      </h2>
 
-                    <h3 className="submitted-to">SUBMITTED TO:</h3>
+                      <div className="text-lg md:text-2xl font-semibold leading-relaxed">
+                        <p>
+                          Name:{" "}
+                          {formData.studentName ||
+                            "Tanjila Khanam Tamim"}
+                        </p>
 
-                    <p>
-                      {data.teacherName || "Khalid Bin Kaysar"} <br />
-                      {data.teacherDesignation || "Lecturer, Mathematics"} <br />
-                      {data.teacherDept || "Dept. Of Related Subjects"} <br />
-                      {data.teacherCollege || "Shyamoli Engineering College"}
-                    </p>
+                        <p>
+                          ID: {formData.studentId || "49/24/CSE-22"}
+                        </p>
 
-                    <h3 className="date-text">
-                      DATE OF SUBMISSION: {data.submissionDate || "4 May 2026"}
-                    </h3>
+                        <p>
+                          Program:{" "}
+                          {formData.program || "B.Sc. in CSE"}
+                        </p>
+
+                        <p>
+                          Semester: {formData.semester || "3rd"}
+                        </p>
+
+                        <p>Batch: {formData.batch || "5th"}</p>
+                      </div>
+
+                      <h2 className="text-2xl md:text-4xl font-bold mt-14 mb-6">
+                        SUBMITTED TO:
+                      </h2>
+
+                      <div className="text-lg md:text-2xl font-semibold leading-relaxed">
+                        <p>
+                          {formData.teacherName ||
+                            "Khalid Bin Kaysar"}
+                        </p>
+
+                        <p>
+                          {formData.teacherDesignation ||
+                            "Lecturer, Mathematics"}
+                        </p>
+
+                        <p>
+                          {formData.department ||
+                            "Dept. Of Related Subjects"}
+                        </p>
+
+                        <p>
+                          {formData.collegeName ||
+                            "Shyamoli Engineering College"}
+                        </p>
+                      </div>
+
+                      <h2 className="text-2xl md:text-4xl font-bold mt-20">
+                        DATE OF SUBMISSION:{" "}
+                        <span className="font-medium">
+                          {formData.date || "4 May 2026"}
+                        </span>
+                      </h2>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
+        {/* END PREVIEW */}
       </div>
     </div>
   );
@@ -153,12 +289,12 @@ export default function App() {
 function Input({ name, placeholder, value, onChange }) {
   return (
     <input
-      className="input"
       type="text"
       name={name}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      className="w-full border border-gray-300 rounded-xl p-4 text-lg outline-none focus:border-green-500"
     />
   );
 }
