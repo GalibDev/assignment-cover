@@ -6,16 +6,72 @@ body{
   background:#e5e5e5;
 }
 
-.preview-area{
+.page{
+  min-height:100vh;
+  background:#e5e5e5;
+  padding:24px;
+}
+
+.layout{
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+}
+
+.form-box{
+  width:340px;
+  background:white;
+  padding:24px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+.form-box h2{
+  text-align:center;
+  font-size:36px;
+  font-weight:bold;
+  margin-bottom:22px;
+}
+
+.input{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px 16px;
+  margin-bottom:14px;
+  border:1px solid #d1d5db;
+  border-radius:9px;
+  font-size:18px;
+  outline:none;
+  background:white;
+}
+
+.generate-btn{
+  width:100%;
+  padding:15px;
+  background:#05a83f;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.preview-wrapper{
   width:100%;
   display:flex;
   justify-content:center;
-  overflow:visible;
 }
 
-.mobile-preview{
+.preview-holder{
   width:794px;
   height:1123px;
+}
+
+.preview-scale{
+  width:794px;
+  height:1123px;
+  transform-origin:top left;
 }
 
 .pdf-page{
@@ -23,7 +79,6 @@ body{
   height:1123px;
   background:white;
   overflow:hidden;
-  margin:0 auto;
 }
 
 .cover-border{
@@ -62,11 +117,28 @@ body{
 .course-info h3{
   font-size:21px;
   font-weight:bold;
-  margin-bottom:22px;
+  margin:22px 0;
 }
 
 .submitted-section{
+  width:430px;
   margin-top:70px;
+  text-align:left;
+}
+
+.submitted-section.left{
+  margin-left:0;
+  margin-right:auto;
+}
+
+.submitted-section.center{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.submitted-section.right{
+  margin-left:auto;
+  margin-right:0;
 }
 
 .submitted-section h3{
@@ -90,28 +162,55 @@ body{
   margin-top:60px;
 }
 
-.pdf-export{
+.exporting-pdf .preview-scale{
   transform:none !important;
-  margin:0 auto !important;
 }
 
-/* MOBILE FULL WIDTH PREVIEW */
 @media screen and (max-width:768px){
-  .preview-area{
-    width:100%;
-    overflow:visible;
+  .page{
+    padding:16px;
   }
 
-  .mobile-preview{
-    width:calc(100vw - 32px);
+  .layout{
+    display:block;
+  }
+
+  .form-box{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:32px;
+  }
+
+  .form-box h2{
+    font-size:34px;
+  }
+
+  .input{
+    font-size:20px;
+    padding:18px 18px;
+    margin-bottom:16px;
+  }
+
+  .generate-btn{
+    font-size:22px;
+    padding:18px;
+  }
+
+  .preview-wrapper{
+    width:100%;
+    display:block;
+  }
+
+  .preview-holder{
+    width:100%;
     height:calc((100vw - 32px) * 1.414);
     overflow:hidden;
-    margin:0 auto;
   }
 
-  .pdf-page{
+  .preview-scale{
+    width:794px;
+    height:1123px;
     transform:scale(calc((100vw - 32px) / 794));
     transform-origin:top left;
-    margin:0 !important;
   }
 }
