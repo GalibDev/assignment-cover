@@ -1,219 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body{
   margin:0;
-  padding:0;
-  background:#e5e7eb;
   font-family:"Times New Roman", serif;
+  background:#e5e5e5;
 }
 
-/* MAIN LAYOUT */
-
-.app-container{
-  min-height:100vh;
-  padding:20px;
-}
-
-.main-grid{
-  display:grid;
-  grid-template-columns:350px 1fr;
-  gap:30px;
-  align-items:start;
-}
-
-/* FORM */
-
-.form-box{
-  background:white;
-  padding:24px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  position:sticky;
-  top:20px;
-}
-
-.form-title{
-  font-size:36px;
-  font-weight:bold;
-  margin-bottom:24px;
-}
-
-.input-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.input{
-  width:100%;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  padding:14px;
-  font-size:18px;
-  outline:none;
-  background:white;
-}
-
-.input:focus{
-  border-color:#16a34a;
-}
-
-.select{
-  width:100%;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  padding:14px;
-  font-size:18px;
-  background:white;
-}
-
-.generate-btn{
-  width:100%;
-  margin-top:20px;
-  background:#00b83d;
-  color:white;
-  border:none;
-  padding:18px;
-  border-radius:14px;
-  font-size:32px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* PREVIEW */
-
-.preview-wrapper{
-  display:flex;
-  justify-content:center;
-  width:100%;
-}
-
-.preview-box{
-  width:100%;
-  overflow:hidden;
-}
-
-.preview-scale{
+.mobile-preview{
   width:794px;
   height:1123px;
-  transform-origin:top left;
 }
 
-.pdf-page{
-  width:794px;
-  height:1123px;
-  background:white;
-  padding:40px;
-  position:relative;
-  border:10px double black;
-  box-sizing:border-box;
-}
-
-/* PDF CONTENT */
-
-.college-title{
-  text-align:center;
-  font-size:34px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.department{
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.logo{
-  width:220px;
-  display:block;
-  margin:40px auto;
-}
-
-.course{
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.assignment{
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.info-section{
-  margin-top:70px;
-  display:flex;
-  justify-content:space-between;
-}
-
-.info-block{
-  width:45%;
-  font-size:18px;
-  line-height:1.8;
-  font-weight:bold;
-}
-
-.date{
-  margin-top:120px;
-  font-size:20px;
-  font-weight:bold;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-  .app-container{
-    padding:10px;
-  }
-
-  .main-grid{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .form-box{
-    position:static;
-    padding:16px;
-  }
-
-  .form-title{
-    font-size:24px;
-  }
-
-  .input-grid{
-    grid-template-columns:1fr;
-  }
-
-  .input,
-  .select{
-    font-size:16px;
-    padding:12px;
-  }
-
-  .generate-btn{
-    font-size:22px;
-    padding:16px;
-  }
-
-  /* THIS IS THE REAL FIX */
-
-  .preview-box{
+@media screen and (max-width:768px){
+  .mobile-preview{
     width:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
+    height:calc((100vw - 32px) * 1.414);
+    overflow:hidden;
   }
 
-  .preview-scale{
-    transform:scale(calc((100vw - 20px) / 794));
-    margin-bottom:-700px;
+  .pdf-page{
+    transform:scale(calc((100vw - 32px) / 794));
+    transform-origin:top left;
+    margin-left:0 !important;
   }
-
 }
