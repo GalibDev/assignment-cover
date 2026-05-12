@@ -6,21 +6,112 @@ body{
   background:#e5e5e5;
 }
 
+.preview-area{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  overflow:visible;
+}
+
 .mobile-preview{
   width:794px;
   height:1123px;
 }
 
+.pdf-page{
+  width:794px;
+  height:1123px;
+  background:white;
+  overflow:hidden;
+  margin:0 auto;
+}
+
+.cover-border{
+  border:7px double black;
+  margin:20px;
+  height:1083px;
+  padding:55px 60px 40px 60px;
+  box-sizing:border-box;
+}
+
+.college-title{
+  text-align:center;
+  font-size:38px;
+  font-weight:bold;
+  line-height:1.2;
+  margin:0;
+}
+
+.department-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:22px;
+}
+
+.college-logo{
+  width:180px;
+  display:block;
+  margin:55px auto;
+}
+
+.course-info{
+  text-align:center;
+}
+
+.course-info h3{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:22px;
+}
+
+.submitted-section{
+  margin-top:70px;
+}
+
+.submitted-section h3{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:22px;
+}
+
+.submitted-section p{
+  font-size:19px;
+  font-weight:bold;
+  line-height:1.3;
+  margin:0;
+}
+
+.submitted-to{
+  margin-top:42px;
+}
+
+.date-text{
+  margin-top:60px;
+}
+
+.pdf-export{
+  transform:none !important;
+  margin:0 auto !important;
+}
+
+/* MOBILE FULL WIDTH PREVIEW */
 @media screen and (max-width:768px){
-  .mobile-preview{
+  .preview-area{
     width:100%;
+    overflow:visible;
+  }
+
+  .mobile-preview{
+    width:calc(100vw - 32px);
     height:calc((100vw - 32px) * 1.414);
     overflow:hidden;
+    margin:0 auto;
   }
 
   .pdf-page{
     transform:scale(calc((100vw - 32px) / 794));
     transform-origin:top left;
-    margin-left:0 !important;
+    margin:0 !important;
   }
 }
